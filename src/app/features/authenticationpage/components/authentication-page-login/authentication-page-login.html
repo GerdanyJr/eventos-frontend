@@ -1,0 +1,22 @@
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()"
+        class="max-w-md mx-auto p-6 bg-white shadow-md rounded-md space-y-4">
+        <label class="block text-sm font-medium text-gray-700 mb-5">E-mail:
+            <input type="text" formControlName="email"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </label>
+    
+        <label class="block text-sm font-medium text-gray-700 mb-5">Senha:
+            <input type="text" formControlName="senha"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </label>
+    
+        <button type="submit"
+            class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">LOGIN</button>
+    </form>
+</div>
+
+<div class="flex justify-start gap-1 text-sm font-medium text-gray-700">
+    <p>Ainda não possui conta?</p>
+    <p class="text text-gray-900 underline cursor-pointer" (click)="goToSignUp()">Cadastre-se já!</p>
+</div>

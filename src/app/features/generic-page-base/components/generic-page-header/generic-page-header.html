@@ -1,0 +1,41 @@
+<header class="flex justify-around bg-neutral-900 h-15 text-white">
+    <div class="flex items-center text-[#FFE047] font-[Lalezar] text-3xl">
+        <img src="assets/icons/ticket.svg" class="size-15" alt="icone">
+        <p>Eventify</p>
+    </div>
+
+    <div class="flex gap-4">
+        @for (item of headerRoutes; track item) {
+        <button
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="border-b-solid hover:border-b-2 border-b-amber-300 font-bold font-[Montserrat] cursor-pointer">
+            {{ item.label }}
+        </button>
+        }
+    </div>
+    <div class="flex gap-4 items-center pr-4">
+        @for (item of authRoutes; track item; let last = $last) {
+            @if (item.show()) {
+                @if (item.action) {
+                    <button
+                        (click)="item.action()"
+                        class="border-b-solid hover:border-b-2 border-b-amber-300 font-[Montserrat] cursor-pointer">
+                        {{ item.label }}
+                    </button>
+                } @else {
+                    <button
+                        [routerLink]="item.route"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        [ngClass]="{ 'bg-[#FFE047] h-12 text-black border-none px-4 py-2 rounded-xl': last }"
+                        class="font-[Montserrat] cursor-pointer hover:border-b-2 border-b-amber-300">
+                        {{ item.label }}
+                    </button>
+                }
+            }
+        }
+    </div>
+
+</header>
