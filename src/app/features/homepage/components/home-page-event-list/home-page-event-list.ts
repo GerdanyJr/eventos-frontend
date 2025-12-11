@@ -4,10 +4,11 @@ import { MonthAbrPipe } from "../../../../pipes/month-abr-pipe";
 import { EventDayPipe } from "../../../../pipes/event-day-pipe";
 import { TimeRangePipe } from "../../../../pipes/time-range-pipe";
 import { CurrencyPipe } from '@angular/common';
+import { HomePageEventListCard } from "../home-page-event-list-card/home-page-event-list-card";
 
 @Component({
   selector: 'app-home-page-event-list',
-  imports: [MonthAbrPipe, EventDayPipe, TimeRangePipe, CurrencyPipe],
+  imports: [MonthAbrPipe, EventDayPipe, TimeRangePipe, CurrencyPipe, HomePageEventListCard],
   templateUrl: './home-page-event-list.html',
   styleUrl: './home-page-event-list.scss'
 })

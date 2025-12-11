@@ -1,61 +1,13 @@
-<div
-    class="flex flex-col rounded-2xl mx-4 sm:mx-6 md:mx-10 mb-10 sm:p-6 md:p-10">
+<div class="flex flex-col rounded-2xl mx-4 sm:mx-6 md:mx-10 mb-10 sm:p-6 md:p-10">
     @if (isLoading) {
     <div class="flex justify-center items-center py-20">
         <p class="text-gray-500">Carregando eventos...</p>
     </div>
     } @else {
-    <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
         @for (event of events; track event.eventoId) {
-        <div
-            class="flex flex-col rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer"
-            (click)="onEventClick(event.eventoId)">
-            <div class="w-full aspect-video overflow-hidden">
-                <img
-                    class="w-full h-full object-cover"
-                    [src]="event.banner"
-                    [alt]="event.nome"
-                    loading="lazy" />
-            </div>
-            <div class="flex p-3 sm:p-4 gap-3">
-                <div
-                    class="flex flex-col font-[Montserrat] items-center justify-start min-w-[60px]">
-                    <p class="text-[#4539B4] font-bold text-sm sm:text-base">{{
-                        event.dataInicio | monthAbr }}</p>
-                    <p class="font-bold text-xl sm:text-2xl">{{ event.dataInicio
-                        | eventDay }}</p>
-                </div>
-                <div class="flex flex-col gap-2 flex-1 font-[Inter]">
-                    <p class="font-semibold text-base sm:text-lg line-clamp-2"
-                        [title]="event.nome">
-                        {{ event.nome }}
-                    </p>
-                    <p class="text-xs sm:text-sm text-gray-600 truncate"
-                        [title]="event.localNome">
-                        {{ event.localNome }}
-                    </p>
-                    <p class="text-xs sm:text-sm text-gray-600">
-                        {{ event.dataInicio | timeRange:event.dataFim }}
-                    </p>
-                    <div
-                        class="flex flex-wrap gap-2 sm:gap-3 text-xs items-center mt-1">
-                        <div class="flex gap-1 items-center">
-                            <img src="assets/icons/ticket-black.svg"
-                                class="size-3 sm:size-4"
-                                alt="Ticket icon">
-                            <p class="whitespace-nowrap">{{  event.preco | currency:'BRL':'symbol':'1.2-2'  }}</p>
-                        </div>
-                        <div class="flex gap-1 items-center">
-                            <img src="assets/icons/star.svg"
-                                class="size-3 sm:size-4"
-                                alt="Star icon">
-                            <p class="whitespace-nowrap">{{ event.qtdInteressados }} interessados</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <app-home-page-event-list-card [event]="event" (eventClick)="onEventClick($event)">
+        </app-home-page-event-list-card>
         } @empty {
         <div class="col-span-full text-center py-20">
             <p class="text-gray-500">Nenhum evento encontrado</p>
