@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventDTO, EventService } from '../../../../service/event-service.service';
 import { HomePageEventListCard } from "../home-page-event-list-card/home-page-event-list-card";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page-event-list',
@@ -12,7 +13,7 @@ export class HomePageEventList implements OnInit {
   events: EventDTO[] = [];
   isLoading = false;
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadEvents();
@@ -22,7 +23,7 @@ export class HomePageEventList implements OnInit {
     this.isLoading = true;
     this.eventService.getEvents().subscribe({
       next: (events) => {
-        this.events = events;
+        this.events = events.slice(0, 4);
         this.isLoading = false;
       },
       error: (error) => {
@@ -36,5 +37,7 @@ export class HomePageEventList implements OnInit {
     console.log(`Evento clicado ${eventId}`);
   }
 
-  loadMore(): void { }
+  loadMore(): void {
+    this.router.navigate(["events"]);
+  }
 }

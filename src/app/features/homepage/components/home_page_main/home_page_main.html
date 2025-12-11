@@ -3,7 +3,8 @@
 <div class="px-10">
     <app-home-page-categories></app-home-page-categories>
 
-    <h2 class="text-2xl font-bold pt-10 py-5">Eventos populares em'localizacao'</h2>
+    <h2 class="text-2xl font-bold pt-10 py-5">Eventos populares
+        em'localizacao'</h2>
     <app-home-page-event-list></app-home-page-event-list>
 
     <h2 class="text-2xl font-bold pt-20 py-5">Descubra os melhores eventos
@@ -18,7 +19,7 @@
     <div class="flex flex-col text-white font-bold">
         <h2 class="text-3xl">Que tal criar um evento com Eventify?</h2>
     </div>
-    <button routerLink="/create-event"
+    <button (click)="onclick()"
         class="bg-amber-300 rounded-2xl text-white font-bold h-10 w-40 hover:bg-amber-200 cursor-pointer">
         Criar
         Evento

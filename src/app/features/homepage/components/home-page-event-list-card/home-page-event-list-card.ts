@@ -4,6 +4,7 @@ import { MonthAbrPipe } from "../../../../pipes/month-abr-pipe";
 import { EventDayPipe } from "../../../../pipes/event-day-pipe";
 import { TimeRangePipe } from "../../../../pipes/time-range-pipe";
 import { CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page-event-list-card',
@@ -12,11 +13,14 @@ import { CurrencyPipe } from '@angular/common';
   styleUrl: './home-page-event-list-card.scss',
 })
 export class HomePageEventListCard {
+
+  constructor(private router: Router) { }
+
   @Input() event!: EventDTO;
 
   @Output() eventClick = new EventEmitter<number>();
 
   onClick(eventId: number) {
-    this.eventClick.emit(this.event.eventoId);
+    this.router.navigate(["event", eventId]);
   }
 }

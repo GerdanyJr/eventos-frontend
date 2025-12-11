@@ -14,9 +14,7 @@ export class GenericPageHeader {
 
   headerRoutes = [
     { label: 'Home', route: ['/home'] },
-    { label: 'Eventos', route: ['/eventos'] },
-    { label: 'Sobre', route: ['/sobre'] },
-    { label: 'Contato', route: ['/contato'] }
+    { label: 'Eventos', route: ['/events'] }
   ];
 
   authRoutes = [

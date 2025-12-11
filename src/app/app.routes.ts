@@ -6,6 +6,7 @@ import { AuthenticationPageLogin } from './features/authenticationpage/component
 import { GenericPageBaseMain } from './features/generic-page-base/components/generic-page-base-main/generic-page-base-main';
 import { CreateEventPageMain } from './features/create-event-page/components/create-event-page-main/create-event-page-main';
 import { EventListPage } from './features/event-list-page/event-list-page';
+import { EventPage } from './features/event-page/event-page';
 
 export const routes: Routes = [
     {
@@ -23,9 +24,8 @@ export const routes: Routes = [
         children: [
             {path: 'home', component: HomePage},
             {path: 'create-event', component: CreateEventPageMain},
+            {path: 'event/:id', component: EventPage},
             {path: 'events', component: EventListPage},
-            // {path: 'about', component: },
-            // {path: 'contact', component: },
             {path: '**', redirectTo: 'home'}
         ]
     },
