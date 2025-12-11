@@ -10,27 +10,27 @@ import { EventPage } from './features/event-page/event-page';
 
 export const routes: Routes = [
     {
-        path: 'auth', 
+        path: 'auth',
         component: AuthenticationPageMain,
         children: [
-            {path: 'signup', component: AuthenticationPageSignUp},
-            {path: 'login', component: AuthenticationPageLogin},
-            {path: '**', redirectTo: 'login'}
+            { path: 'signup', component: AuthenticationPageSignUp },
+            { path: 'login', component: AuthenticationPageLogin },
+            { path: '**', redirectTo: 'login' }
         ]
     },
     {
-        path: '', 
+        path: '',
         component: GenericPageBaseMain,
         children: [
-            {path: 'home', component: HomePage},
-            {path: 'create-event', component: CreateEventPageMain},
-            {path: 'event/:id', component: EventPage},
-            {path: 'events', component: EventListPage},
-            {path: '**', redirectTo: 'home'}
+            { path: 'home', component: HomePage },
+            { path: 'create-event', component: CreateEventPageMain },
+            { path: 'event/:id', component: EventPage, runGuardsAndResolvers: 'always' },
+            { path: 'events', component: EventListPage },
+            { path: '**', redirectTo: 'home' }
         ]
     },
     {
-        path: '**', 
+        path: '**',
         redirectTo: ''
     }
 ];

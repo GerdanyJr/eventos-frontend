@@ -18,9 +18,7 @@ export class HomePageEventListCard {
 
   @Input() event!: EventDTO;
 
-  @Output() eventClick = new EventEmitter<number>();
-
   onClick(eventId: number) {
-    this.router.navigate(["event", eventId]);
+    this.router.navigate(["event", eventId], { onSameUrlNavigation: 'reload' });
   }
 }

@@ -1,12 +1,14 @@
-<div class="flex flex-col rounded-2xl mx-4 sm:mx-6 md:mx-10 mb-10 sm:p-6 md:p-10">
+<div
+    class="flex flex-col rounded-2xl mx-4 sm:mx-6 md:mx-10 mb-10 sm:p-6 md:p-10">
     @if (isLoading) {
     <div class="flex justify-center items-center py-20">
         <p class="text-gray-500">Carregando eventos...</p>
     </div>
     } @else {
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+    <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
         @for (event of events; track event.eventoId) {
-        <app-home-page-event-list-card [event]="event" (eventClick)="onEventClick($event)" />
+        <app-home-page-event-list-card [event]="event" />
         } @empty {
         <div class="col-span-full text-center py-20">
             <p class="text-gray-500">Nenhum evento encontrado</p>

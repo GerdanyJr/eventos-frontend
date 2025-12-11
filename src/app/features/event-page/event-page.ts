@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EventDetailDTO, EventService, TicketTypeDTO } from '../../service/event-service.service';
+import { EventDetailDTO, EventDTO, EventService, TicketTypeDTO } from '../../service/event-service.service';
+import { HomePageEventListCard } from "../homepage/components/home-page-event-list-card/home-page-event-list-card";
 
 @Component({
   selector: 'app-event-page',
-  imports: [],
+  imports: [HomePageEventListCard],
   templateUrl: './event-page.html',
   styleUrl: './event-page.scss',
 })
 export class EventPage {
+  events: EventDTO[] = [];
   event?: EventDetailDTO;
   isLoading = true;
   error: string | null = null;
@@ -20,9 +22,30 @@ export class EventPage {
 
   ngOnInit(): void {
     const eventId = this.route.snapshot.paramMap.get('id');
+    
     if (eventId) {
       this.loadEventDetails(+eventId);
     }
+
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
+    this.isLoading = true;
+    this.eventService.getEvents().subscribe({
+      next: (events) => {
+        this.events = events;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar eventos:', error);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  onEventClick(eventId: number) {
+    console.log(`Evento clicado ${eventId}`);
   }
 
   loadEventDetails(id: number): void {
@@ -30,8 +53,6 @@ export class EventPage {
     this.eventService.getEventDetail(id).subscribe({
       next: (event) => {
         this.event = event;
-        console.log(this.event);
-        
         this.isLoading = false;
       },
       error: (error) => {
@@ -73,7 +94,6 @@ export class EventPage {
 
   onBuyTicket(ticketType: TicketTypeDTO): void {
     console.log('Comprar ingresso:', ticketType);
-    // Implementar lógica de compra
   }
 
   onShare(): void {
