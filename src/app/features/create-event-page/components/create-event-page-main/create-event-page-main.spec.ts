@@ -10,7 +10,7 @@ describe('CreateEventPageMain', () => {
     await TestBed.configureTestingModule({
       imports: [CreateEventPageMain]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CreateEventPageMain);
     component = fixture.componentInstance;
