@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Category, CategoryService } from '../../../../service/category-service.service';
+import { Location, LocationService } from '../../../../service/location-service.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -20,15 +21,20 @@ export class CreateEventPageDetails implements OnInit {
       dataFim: new FormControl('', [Validators.required]),
       horaInicio: new FormControl('', [Validators.required]),
       horaFim: new FormControl('', [Validators.required]),
-      localizacao: new FormControl('', [Validators.required]),
+      localId: new FormControl('', [Validators.required]),
       descricao: new FormControl('', [Validators.required]),
     }
   )
 
   categories: Category[] = []
+  locations: Location[] = []
 
-  constructor(private categoryService: CategoryService) {
-  }
+  @Output() formSubmit = new EventEmitter<any>();
+
+  constructor(
+    private categoryService: CategoryService,
+    private locationService: LocationService
+  ) { }
 
   ngOnInit(): void {
     this.categoryService.findAll().subscribe(
@@ -36,13 +42,19 @@ export class CreateEventPageDetails implements OnInit {
         this.categories = response
       }
     )
+    this.locationService.getLocations().subscribe(
+      (response) => {
+        this.locations = response
+      }
+    )
   }
 
   continuar() {
     if (this.eventDetailsForm.valid) {
-      console.log('✅ Dados enviados:', this.eventDetailsForm.value);
+      this.formSubmit.emit(this.eventDetailsForm.value);
     } else {
       console.log('⚠️ Formulário inválido');
+      this.eventDetailsForm.markAllAsTouched();
     }
   }
 }

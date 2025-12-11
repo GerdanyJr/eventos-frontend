@@ -1,13 +1,62 @@
-<div class="flex flex-col items-center min-h-screen bg-gray-100 p-6">
-    <h1 class="self-start text-4xl font-semibold text-gray-800 mb-4 text-center">Criar Novo Evento</h1>
-    
-    <!-- detalhes do evento -->
-     
-     <app-create-event-page-details class="min-w-5xl"></app-create-event-page-details>
+<div class="flex flex-col items-center min-h-screen bg-white p-6">
+    <div class="w-full max-w-5xl mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Criar um Novo Evento</h1>
+
+        <div class="relative flex justify-between items-center w-full mb-8">
+            <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -z-10 transform -translate-y-1/2"></div>
+
+            <div class="flex flex-col items-center">
+                <div class="w-4 h-4 rounded-full mb-2 transition-colors duration-300"
+                    [ngClass]="{'bg-indigo-900 ring-4 ring-indigo-100': currentStep === 1, 'bg-indigo-900': currentStep > 1}">
+                </div>
+                <span class="text-sm font-semibold transition-colors duration-300"
+                    [ngClass]="{'text-gray-800': currentStep >= 1, 'text-gray-500': currentStep < 1}">Editar</span>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="w-4 h-4 rounded-full border-2 mb-2 transition-colors duration-300"
+                    [ngClass]="{'bg-indigo-900 ring-4 ring-indigo-100 border-indigo-900': currentStep === 2, 'bg-indigo-900 border-indigo-900': currentStep > 2, 'bg-white border-gray-300': currentStep < 2}">
+                </div>
+                <span class="text-sm transition-colors duration-300"
+                    [ngClass]="{'font-semibold text-gray-800': currentStep >= 2, 'text-gray-500': currentStep < 2}">Banner</span>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="w-4 h-4 rounded-full border-2 mb-2 transition-colors duration-300"
+                    [ngClass]="{'bg-indigo-900 ring-4 ring-indigo-100 border-indigo-900': currentStep === 3, 'bg-indigo-900 border-indigo-900': currentStep > 3, 'bg-white border-gray-300': currentStep < 3}">
+                </div>
+                <span class="text-sm transition-colors duration-300"
+                    [ngClass]="{'font-semibold text-gray-800': currentStep >= 3, 'text-gray-500': currentStep < 3}">Ingressos</span>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <div class="w-4 h-4 rounded-full border-2 mb-2 transition-colors duration-300"
+                    [ngClass]="{'bg-indigo-900 ring-4 ring-indigo-100 border-indigo-900': currentStep === 4, 'bg-white border-gray-300': currentStep < 4}">
+                </div>
+                <span class="text-sm transition-colors duration-300"
+                    [ngClass]="{'font-semibold text-gray-800': currentStep >= 4, 'text-gray-500': currentStep < 4}">Revisão</span>
+            </div>
+        </div>
+    </div>
+
+    <app-create-event-page-details *ngIf="currentStep === 1" class="w-full max-w-5xl"
+        (formSubmit)="onDetailsSubmit($event)">
+    </app-create-event-page-details>
+
+    <app-create-event-page-banner *ngIf="currentStep === 2" class="w-full max-w-5xl" [eventTitle]="eventData.titulo"
+        [eventLocation]="eventData.localizacao" [eventTime]="eventData.horaInicio" (goBack)="onBack()"
+        (saveAndContinue)="onBannerSubmit($event)">
+    </app-create-event-page-banner>
+
+    <!-- Step 3: Ticketing -->
+    <app-create-event-page-ticketing *ngIf="currentStep === 3" class="w-full max-w-5xl" [eventTitle]="eventData.titulo"
+        [eventLocation]="eventData.localizacao" [eventTime]="eventData.horaInicio" (goBack)="onBack()"
+        (saveAndContinue)="onTicketingSubmit($event)">
+    </app-create-event-page-ticketing>
+
+    <!-- Step 4: Review -->
+    <app-create-event-page-review *ngIf="currentStep === 4" class="w-full max-w-5xl" [eventData]="eventData"
+        (goBack)="onBack()" (publishEvent)="onPublish()">
+    </app-create-event-page-review>
 
 </div>
-
-
-<!-- banner do evento -->
-
- <!-- precificacao? pago : gratuiro -->
